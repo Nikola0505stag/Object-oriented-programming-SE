@@ -22,7 +22,7 @@ public:
 	Navy(const Navy& other);
 
 	void setNavyName(const char* name);
-	char* getNavyName()const;
+	const char* getNavyName()const;
 	int getShipsSize()const;
 
 	void addShip(const Ship& ship);

@@ -6,8 +6,15 @@
 
 using std::endl;
 
+void NavyHtmlTableGenerator::saveShip(std::ofstream& ofs, int i) const {
+	ofs << "<tr>" << endl;
+	ofs << "<td>" << navy.getShip(i)->getShipName() << "</td>" << endl;
+	ofs << "<td>" << navy.getShip(i)->getAge() << "</td>" << endl;
+	ofs << "<td>" << navy.getShip(i)->getCountWeapons() << "</td>" << endl;
+	ofs << "</tr>" << endl;
+}
 
-void NavyHtmlTableGenerator::saveToFile() const{
+void NavyHtmlTableGenerator::saveToFile()const{
 	std::ofstream ofs(this->fileName);
 
 	ofs << "<table>";
@@ -17,11 +24,7 @@ void NavyHtmlTableGenerator::saveToFile() const{
 	ofs << "</tr>" << endl;
 
 	for (int i = 0; i < this->navy.getShipsSize(); i++) {
-		ofs << "<tr>" << endl;
-		ofs << "<td>" << navy.getShip(i)->getShipName() << "</td>" << endl;
-		ofs << "<td>" << navy.getShip(i)->getAge() << "</td>" << endl;
-		ofs << "<td>" << navy.getShip(i)->getCountWeapons() << "</td>" << endl;
-		ofs << "</tr>" << endl;
+		saveShip(ofs, i);
 	}
 	ofs << "</table>";
 	ofs.close();

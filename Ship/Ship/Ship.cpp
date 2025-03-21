@@ -68,7 +68,7 @@ void Ship::printShip()const {
 	std::cout << "Ship count weapons: " << countWeapons << std::endl;
 }
 
-char* Ship::getShipName()const {
+const char* Ship::getShipName()const {
 	return shipName;
 }
 int Ship::getAge()const {
@@ -82,9 +82,8 @@ int Ship::getCountWeapons()const {
 }
 
 void Ship::setShipName(const char* name) {
-	if (!name) {
-		strcpy(this->shipName, "");
-
+	if (!name || name == shipName) {
+		this->shipName = nullptr;
 		return;
 	}
 

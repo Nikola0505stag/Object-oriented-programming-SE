@@ -24,7 +24,7 @@ public:
 	Ship(const Ship& other);
 	Ship(const char* name, int age, classShip clas, int countWeapons);
 	void printShip()const;
-	char* getShipName()const;
+	const char* getShipName()const;
 	int getAge()const;
 	void getClass()const;
 	int getCountWeapons()const;

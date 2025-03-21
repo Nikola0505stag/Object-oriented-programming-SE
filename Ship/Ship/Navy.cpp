@@ -57,7 +57,7 @@ void Navy::setNavyName(const char* name) {
 	strcpy(navyName, name);
 }
 
-char* Navy::getNavyName()const {
+const char* Navy::getNavyName()const {
 	return this->navyName;
 }
 

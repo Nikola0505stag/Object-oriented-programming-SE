@@ -73,7 +73,9 @@ int main() {
 
 	cout << navy.compareGuns(navy3);
 
-	NavyHtmlTableGenerator html(navy, "Html.txt");
+	NavyHtmlTableGenerator html(navy3,"Html.txt");
+
+	
 
 	return 0;
 }
