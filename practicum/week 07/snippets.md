@@ -124,7 +124,7 @@ private:
 public:
 	X(const A& a, B* b) : obj2(*b)
 	{
-		obj1=new A(a)
+		obj1=new A(a);
 		std::cout << "X()" << std::endl;
 	}
 
