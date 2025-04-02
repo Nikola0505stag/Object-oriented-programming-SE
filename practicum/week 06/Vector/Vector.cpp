@@ -142,7 +142,7 @@ double Vector::operator~() const
 	return len;
 }
 
-void Vector::saveToFile(const char* file)
+void Vector::saveToFile(const char* file) const
 {
 	if (!file)
 	{
