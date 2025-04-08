@@ -8,3 +8,4 @@
 - [**Тема 5:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-05) Мутиращи член-данни. Разделна компилация. Композиция и агрегация. Копиращ конструктор и оператор за присвоявяне (=). Голяма четворка
 - [**Тема 6:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-06)  Предефиниране на оператори. Приятелски класове и функции.
 - [**Тема 7:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-07)  Ключова дума static. Стринг.
+- [**Тема 8:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-08) Изключения.
