@@ -75,9 +75,10 @@ class B {
 public:
     B() { 
         std::cout << "B()" << std::endl; 
-        throw std::runtime_error("Exception in B constructor");
     }
-    ~B() { std::cout << "~B()"<< std::endl; }
+    ~B() { std::cout << "~B()"<< std::endl;
+            throw std::runtime_error("Exception in B constructor");
+}
 };
 
 class C {
