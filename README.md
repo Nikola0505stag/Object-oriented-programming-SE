@@ -9,3 +9,5 @@
 - [**Тема 6:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-06)  Предефиниране на оператори. Приятелски класове и функции.
 - [**Тема 7:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-07)  Ключова дума static. Стринг.
 - [**Тема 8:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-08) Изключения.
+- [**Тема 9:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-09) Масиви от указатели към обекти. Move семантики.
+- [**Тема 10:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-10) Наследяване.
