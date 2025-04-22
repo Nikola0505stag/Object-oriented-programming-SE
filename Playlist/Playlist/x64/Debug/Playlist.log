@@ -1,0 +1,6 @@
+﻿  Playlist.cpp
+C:\Users\nikne\Desktop\FMI\OOP\SEM\sem7\Playlist\Playlist\Playlist.cpp(137,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\nikne\Desktop\FMI\OOP\SEM\sem7\Playlist\Playlist\Playlist.cpp(141,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
+  Playlist.vcxproj -> C:\Users\nikne\Desktop\FMI\OOP\SEM\sem7\Playlist\x64\Debug\Playlist.exe
