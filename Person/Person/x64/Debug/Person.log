@@ -1,5 +1,0 @@
-﻿  main.cpp
-  Teacher.cpp
-  Generating Code...
-C:\Users\nikne\Desktop\FMI\OOP\SEM\sem10\zad1\Person\Person\Teacher.cpp(57,1): error C4716: 'Teacher::operator=': must return a value
-C:\Users\nikne\Desktop\FMI\OOP\SEM\sem10\zad1\Person\Person\Teacher.cpp(48,1): error C4716: 'Teacher::operator=': must return a value
