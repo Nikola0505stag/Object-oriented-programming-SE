@@ -13,3 +13,4 @@
 - [**Тема 10:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-10) Наследяване.
 - [**Тема 11:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-11) Статично и динамично свързване. Виртуални функции. Полиморфизъм. Абстрактни класове. Ключови думи - override, final. Виртуални таблици.
 - [**Тема 12:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-12) Колекции от обекти в полиморфна йерархия. Копиране, триене, разпознаване. Шаблони.
+- [**Тема 13:**](https://github.com/KristianIvanov24/Object-oriented-programming-SE/tree/main/sem-13) Множествено наследяване. Виртуално наследяване. Виртуални таблици при множествено и виртуално наследяване. Диамантен проблем.
