@@ -1,11 +1,12 @@
 #include <iostream>
 
 template <typename T>
-
 class MyVector {
+	static constexpr size_t INITIAL_CAPACITY = 8;
+
 	T* data = nullptr;
-	size_t capacity;
-	size_t size;
+	size_t capacity=0;
+	size_t size=0;
 
 	void copyFrom(const MyVector<T>& other);
 	void free();
@@ -61,7 +62,7 @@ void MyVector<T>::copyFrom(const MyVector<T>& other)
 
 	data = new T[capacity];
 
-	for (int i = 0; i < size; i++) {
+	for (size_t i = 0; i < size; i++) {
 		data[i] = other.data[i];
 	}
 }
@@ -93,7 +94,7 @@ void MyVector<T>::resize(size_t newCapacity)
 
 	T* newData = new T[newCapacity];
 
-	for (int i = 0; i < size; i++) {
+	for (size_t i = 0; i < size; i++) {
 		newData[i] = std::move(data[i]);
 	}
 
@@ -108,7 +109,7 @@ template<typename T>
 MyVector<T>::MyVector()
 {
 	size = 0;
-	capacity = 8;
+	capacity = INITIAL_CAPACITY;
 	data = new T[capacity];
 }
 
@@ -117,14 +118,16 @@ MyVector<T>::MyVector(size_t n)
 {
 	size = n;
 	capacity = n;
-	data = new T[capacity];
+	data = new T[capacity]{};
 }
 
 template<typename T>
 MyVector<T>::MyVector(size_t n, const T& elem)
 {
-	MyVector<T>::MyVector(n);
-	for (int i = 0; i < size; i++) {
+	size = capacity = n;
+	data = new T[capacity]{};
+
+	for (size_t i = 0; i < size; i++) {
 		data[i] = elem;
 	}
 }
