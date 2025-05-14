@@ -24,17 +24,16 @@ public:
 	MyVector<T>& operator=(MyVector<T>&& other) noexcept;
 	~MyVector();
 
-
 	void push_back(const T& elem);
 	void push_back(T&& elem);
-	
+
 	void pop_back();
 
 	void insert(size_t idx, const T& elem);
 	void insert(size_t idx, T&& elem);
 
 	void erase(size_t idx);
-	
+
 	T& operator[](size_t idx);
 	const T& operator[](size_t idx) const;
 
@@ -52,14 +51,10 @@ public:
 
 	size_t getSize() const;
 	size_t getCapacity() const;
-
-	template <typename T>
-	friend std::ostream& operator<<(std::ostream& os, const MyVector<T>& myvector);
-
 };
 
 template<typename T>
-inline void MyVector<T>::copyFrom(const MyVector<T>& other)
+void MyVector<T>::copyFrom(const MyVector<T>& other)
 {
 	size = other.size;
 	capacity = other.capacity;
@@ -67,12 +62,12 @@ inline void MyVector<T>::copyFrom(const MyVector<T>& other)
 	data = new T[capacity];
 
 	for (int i = 0; i < size; i++) {
-		data = other.data;
+		data[i] = other.data[i];
 	}
 }
 
 template<typename T>
-inline void MyVector<T>::free()
+void MyVector<T>::free()
 {
 	delete[] data;
 	data = nullptr;
@@ -81,8 +76,8 @@ inline void MyVector<T>::free()
 }
 
 template<typename T>
-inline void MyVector<T>::moveFrom(MyVector<T>&& other)
-{	
+void MyVector<T>::moveFrom(MyVector<T>&& other)
+{
 	size = other.size;
 	capacity = other.capacity;
 
@@ -93,13 +88,13 @@ inline void MyVector<T>::moveFrom(MyVector<T>&& other)
 }
 
 template<typename T>
-inline void MyVector<T>::resize(size_t newCapacity)
+void MyVector<T>::resize(size_t newCapacity)
 {
 
 	T* newData = new T[newCapacity];
 
 	for (int i = 0; i < size; i++) {
-		newData = data;
+		newData[i] = std::move(data[i]);
 	}
 
 	delete[] data;
@@ -110,7 +105,7 @@ inline void MyVector<T>::resize(size_t newCapacity)
 }
 
 template<typename T>
-inline MyVector<T>::MyVector()
+MyVector<T>::MyVector()
 {
 	size = 0;
 	capacity = 8;
@@ -118,7 +113,7 @@ inline MyVector<T>::MyVector()
 }
 
 template<typename T>
-inline MyVector<T>::MyVector(size_t n)
+MyVector<T>::MyVector(size_t n)
 {
 	size = n;
 	capacity = n;
@@ -126,7 +121,7 @@ inline MyVector<T>::MyVector(size_t n)
 }
 
 template<typename T>
-inline MyVector<T>::MyVector(size_t n, const T& elem)
+MyVector<T>::MyVector(size_t n, const T& elem)
 {
 	MyVector<T>::MyVector(n);
 	for (int i = 0; i < size; i++) {
@@ -135,19 +130,19 @@ inline MyVector<T>::MyVector(size_t n, const T& elem)
 }
 
 template<typename T>
-inline MyVector<T>::MyVector(const MyVector<T>& other)
+MyVector<T>::MyVector(const MyVector<T>& other)
 {
 	copyFrom(other);
 }
 
 template<typename T>
-inline MyVector<T>::MyVector(MyVector<T>&& other) noexcept
+MyVector<T>::MyVector(MyVector<T>&& other) noexcept
 {
 	moveFrom(std::move(other));
 }
 
 template<typename T>
-inline MyVector<T>& MyVector<T>::operator=(const MyVector<T>& other)
+MyVector<T>& MyVector<T>::operator=(const MyVector<T>& other)
 {
 	if (this != &other) {
 		free();
@@ -157,7 +152,7 @@ inline MyVector<T>& MyVector<T>::operator=(const MyVector<T>& other)
 }
 
 template<typename T>
-inline MyVector<T>& MyVector<T>::operator=(MyVector<T>&& other) noexcept
+MyVector<T>& MyVector<T>::operator=(MyVector<T>&& other) noexcept
 {
 	if (this != &other) {
 		free();
@@ -167,161 +162,144 @@ inline MyVector<T>& MyVector<T>::operator=(MyVector<T>&& other) noexcept
 }
 
 template<typename T>
-inline MyVector<T>::~MyVector()
+MyVector<T>::~MyVector()
 {
 	free();
 }
 
 template<typename T>
-inline void MyVector<T>::push_back(const T& elem)
+void MyVector<T>::push_back(const T& elem)
 {
-	if (size >= capacity)
+	if (size == capacity)
 		resize(capacity * 2);
 
 	data[size++] = elem;
 }
 
 template<typename T>
-inline void MyVector<T>::push_back(T&& elem)
+void MyVector<T>::push_back(T&& elem)
 {
-	if (size >= capacity)
+	if (size == capacity)
 		resize(capacity * 2);
 
 	data[size++] = std::move(elem);
 }
 
 template<typename T>
-inline void MyVector<T>::pop_back()
+void MyVector<T>::pop_back()
 {
+	if (size == 0)
+		return;
+
 	size--;
 }
 
 template<typename T>
-inline void MyVector<T>::insert(size_t idx, const T& elem)
+void MyVector<T>::insert(size_t idx, const T& elem)
 {
-	if (size >= capacity)
+	if (idx > size)
+		return;
+
+	if (size == capacity)
 		resize(capacity * 2);
 
-	for (int i = size; i > idx; i--) {
-		data[i] = data[i - 1];
+	for (size_t i = size; i > idx; i--) {
+		data[i] = std::move(data[i - 1]);
 	}
 	data[idx] = elem;
+	size++;
 }
 
 template<typename T>
-inline void MyVector<T>::insert(size_t idx, T&& elem)
+void MyVector<T>::insert(size_t idx, T&& elem)
 {
-	if (size >= capacity)
+	if (idx > size)
+		return;
+
+	if (size == capacity)
 		resize(capacity * 2);
 
-	for (int i = size; i > idx; i--) {
+	for (size_t i = size; i > idx; i--) {
 		data[i] = std::move(data[i - 1]);
 	}
 	data[idx] = std::move(elem);
+	size++;
 }
 
 template<typename T>
-inline void MyVector<T>::erase(size_t idx)
+void MyVector<T>::erase(size_t idx)
 {
-	if (idx > size)
-		throw std::invalid_argument("Index must be below size...");
+	if (idx >= size)
+		return;
 
-	for (int i = idx; i < size - 2; i++) {
-		data[i] = data[i + 1];
+	for (size_t i = idx; i < size - 1; i++) {
+		data[i] = std::move(data[i + 1]);
 	}
 	size--;
 }
 
 template<typename T>
-inline T& MyVector<T>::operator[](size_t idx)
+T& MyVector<T>::operator[](size_t idx)
 {
-	if (idx > size)
-		throw std::invalid_argument("Index must be below size...");
-
 	return data[idx];
 }
 
 template<typename T>
-inline const T& MyVector<T>::operator[](size_t idx) const
+const T& MyVector<T>::operator[](size_t idx) const
 {
-	if (idx > size)
-		throw std::invalid_argument("Index must be below size...");
-
 	return data[idx];
 }
 
 template<typename T>
-inline void MyVector<T>::shrink_to_fit()
+void MyVector<T>::shrink_to_fit()
 {
-	T* newData = new T[size];
-
-	for (int i = 0; i < size; i++) {
-		newData[i] = data[i];
-	}
-
-	capacity = size;
-	data = newData;
+	resize(size);
 }
 
 template<typename T>
-inline void MyVector<T>::clear()
+void MyVector<T>::clear()
 {
-	size_t curr = capacity;
-	free();
-
-	capacity = curr;
 	size = 0;
-	data = new T[capacity];
 }
 
 template<typename T>
-inline const T& MyVector<T>::front() const
+const T& MyVector<T>::front() const
 {
 	return data[0];
 }
 
 template<typename T>
-inline T& MyVector<T>::front()
+T& MyVector<T>::front()
 {
 	return data[0];
 }
 
 template<typename T>
-inline const T& MyVector<T>::back() const
+const T& MyVector<T>::back() const
 {
 	return data[size - 1];
 }
 
 template<typename T>
-inline T& MyVector<T>::back()
+T& MyVector<T>::back()
 {
 	return data[size - 1];
 }
 
 template<typename T>
-inline bool MyVector<T>::empty() const
+bool MyVector<T>::empty() const
 {
 	return size == 0;
 }
 
 template<typename T>
-inline size_t MyVector<T>::getSize() const
+size_t MyVector<T>::getSize() const
 {
 	return size;
 }
 
 template<typename T>
-inline size_t MyVector<T>::getCapacity() const
+size_t MyVector<T>::getCapacity() const
 {
 	return capacity;
-}
-
-template<typename T>
-inline std::ostream& operator<<(std::ostream& os, const MyVector<T>& myvector){
-	
-	for (int i = 0; i < myvector.size; i++) {
-		os << myvector.data[i] << " ";
-	}
-	
-	return os;
 }
